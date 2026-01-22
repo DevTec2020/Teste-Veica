@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import Wallpaper from "../../../assets/Wallpaper.png"
+import Wallpaper from "../../assets/Wallpaper.png"
 
 export default function Login() {
   

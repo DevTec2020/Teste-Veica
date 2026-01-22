@@ -4,19 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaUsers, FaCalculator, FaKey, FaMoneyBillWave, FaSignOutAlt, FaBars } from "react-icons/fa";
-
 import SideBarMob from "./SideBarMob";
+
 
 export default function SideBarDesk() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { label: "Cadastrar", href: "/dashboard/cadastro", icon: FaUsers },
-    { label: "Usuários", href: "/dashboard/usuarios", icon: FaUsers },
-    { label: "Permutações", href: "/dashboard/desafios/permutacao", icon: FaCalculator },
-    { label: "Decifra", href: "/dashboard/desafios/decifra", icon: FaKey },
-    { label: "Imposto", href: "/dashboard/desafios/imposto", icon: FaMoneyBillWave },
+    { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
+    { label: "Usuários", href: "/usuarios", icon: FaUsers },
+    { label: "Permutações", href: "/desafios/permutacao", icon: FaCalculator },
+    { label: "Decifra", href: "/desafios/decifra", icon: FaKey },
+    { label: "Imposto", href: "/desafios/imposto", icon: FaMoneyBillWave },
   ];
 
   return (

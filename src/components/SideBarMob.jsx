@@ -7,11 +7,11 @@ export default function SideBarMob({ isOpen, onClose }) {
   const pathname = usePathname();
 
   const menuItems = [
-    { label: "Cadastrar", href: "/dashboard/cadastro", icon: FaUsers },
-    { label: "Usuários", href: "/dashboard/usuarios", icon: FaUsers },
-    { label: "Permutações", href: "/dashboard/desafios/permutacao", icon: FaCalculator },
-    { label: "Decifra", href: "/dashboard/desafios/decifra", icon: FaKey },
-    { label: "Imposto", href: "/dashboard/desafios/imposto", icon: FaMoneyBillWave },
+    { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
+    { label: "Usuários", href: "/usuarios", icon: FaUsers },
+    { label: "Permutações", href: "/desafios/permutacao", icon: FaCalculator },
+    { label: "Decifra", href: "/desafios/decifra", icon: FaKey },
+    { label: "Imposto", href: "/desafios/imposto", icon: FaMoneyBillWave },
   ];
 
   return (
