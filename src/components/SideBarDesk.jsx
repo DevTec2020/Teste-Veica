@@ -46,7 +46,7 @@ export default function SideBarDesk() {
             );
           })}
 
-          <Link href="/login" className="flex items-center gap-3 p-3 text-red-400">
+          <Link href="/" className="flex items-center gap-3 p-3 text-red-400">
             <FaSignOutAlt /> Sair
           </Link>
         </nav>

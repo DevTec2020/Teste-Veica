@@ -61,7 +61,7 @@ export default function SideBarMob({ isOpen, onClose }) {
             );
           })}
 
-          <Link href="/login" onClick={onClose} className="flex items-center gap-3 p-3 text-red-400">
+          <Link href="/" onClick={onClose} className="flex items-center gap-3 p-3 text-red-400">
             <FaSignOutAlt /> Sair
           </Link>
         </nav>
