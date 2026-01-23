@@ -1,12 +1,9 @@
 'use client';
 import { useState } from 'react';
 import SideBarDesk from '../../components/SideBarDesk';
-import { FaBars } from 'react-icons/fa';
-import { useAuth } from '@/contexts/AuthContext';
 
 export default function DashboardLayout({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
 
   return (
     <div>

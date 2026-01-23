@@ -5,24 +5,27 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FaLock, FaUser, FaSignInAlt, FaArrowRight } from "react-icons/fa";
+import { FaLock, FaUser, FaSignInAlt } from "react-icons/fa";
 
+import { useUser} from "@/contexts/UserContext";
+
+// Schema de validação zod
 const loginSchema = z.object({
   usuario: z.string().min(1, "O usuário é obrigatório"),
   senha: z.string().min(1, "A senha é obrigatória"),
 });
 
 export default function LoginPage() {
-  const router = useRouter();
+  const { saveSession } = useUser();
   const [loginError, setLoginError] = useState("");
 
+  // Configurações do hook-form
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data) => {
+
+  async function onSubmit(data) {
     try {
       setLoginError("");
 
@@ -33,11 +36,10 @@ export default function LoginPage() {
       });
 
       // Salva a sessão no LocalStorage
-      localStorage.setItem("user_session", JSON.stringify(response.data.user));
-
-      router.push("/usuarios");
+      saveSession(response.data)
 
     } catch (err) {
+      console.error(err);
       setLoginError("Usuário ou senha inválidos.");
     }
   };
