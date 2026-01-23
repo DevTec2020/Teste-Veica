@@ -4,8 +4,8 @@ const TABELA_IR = [
     {limite: 2000.00, aliquota: 0.08},
 ]
 
-export default function CalcularImposto(ValorInput){
-    let renda = parseFloat(ValorInput);
+export default function calcularImposto(valorInput){
+    let renda = parseFloat(valorInput);
     let imposTotal = 0;
 
 

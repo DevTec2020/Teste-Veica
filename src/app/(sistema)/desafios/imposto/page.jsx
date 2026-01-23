@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import CalcularImposto from "@/utils/CalcularImposto";
+import calcularImposto from "@/utils/calcularImposto";
 import { FaMoneyBillWave, FaCalculator } from "react-icons/fa";
 
 export default function ImpostoPage() {
@@ -13,7 +13,7 @@ export default function ImpostoPage() {
     if(!renda) return setResultado("Insira um valor")
 
     const valorFormatado = renda.replace(",", ".")
-    const retorno = CalcularImposto(valorFormatado)
+    const retorno = calcularImposto(valorFormatado)
     setResultado(retorno)
 
   }
@@ -36,7 +36,7 @@ export default function ImpostoPage() {
         </div>
       </header>
 
-      <div className="flex-1 flex items-center justify-center p-4">
+      <main className="flex-1 flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-xl border border-gray-200">
           <form onSubmit={handleCalcular} className="space-y-4">
             <div>
@@ -92,7 +92,7 @@ export default function ImpostoPage() {
           </div>
         </div>
 
-      </div>
+      </main>
     </div>
   );
 }
