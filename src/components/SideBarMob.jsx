@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaUsers, FaCalculator, FaKey, FaMoneyBillWave, FaSignOutAlt, FaBars } from "react-icons/fa";
+import { FaUsers, FaLayerGroup, FaKey, FaMoneyBillWave, FaSignOutAlt, FaBars } from "react-icons/fa";
 
 export default function SideBarMob({ isOpen, onClose }) {
   const pathname = usePathname();
@@ -9,7 +9,7 @@ export default function SideBarMob({ isOpen, onClose }) {
   const menuItems = [
     { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
     { label: "Usuários", href: "/usuarios", icon: FaUsers },
-    { label: "Permutações", href: "/desafios/permutacao", icon: FaCalculator },
+    { label: "Permutações", href: "/desafios/permutacao", icon: FaLayerGroup },
     { label: "Decifra", href: "/desafios/decifra", icon: FaKey },
     { label: "Imposto", href: "/desafios/imposto", icon: FaMoneyBillWave },
   ];

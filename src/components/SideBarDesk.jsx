@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaUsers, FaCalculator, FaKey, FaMoneyBillWave, FaSignOutAlt, FaBars } from "react-icons/fa";
+import { FaUsers, FaLayerGroup, FaKey, FaMoneyBillWave, FaSignOutAlt, FaBars } from "react-icons/fa";
 import SideBarMob from "./SideBarMob";
 
 
@@ -14,7 +14,7 @@ export default function SideBarDesk() {
   const menuItems = [
     { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
     { label: "Usuários", href: "/usuarios", icon: FaUsers },
-    { label: "Permutações", href: "/desafios/permutacao", icon: FaCalculator },
+    { label: "Permutações", href: "/desafios/permutacao", icon: FaLayerGroup },
     { label: "Decifra", href: "/desafios/decifra", icon: FaKey },
     { label: "Imposto", href: "/desafios/imposto", icon: FaMoneyBillWave },
   ];
@@ -58,7 +58,7 @@ export default function SideBarDesk() {
 
       {/* Botão Mobile */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 text-white"
+        className="md:hidden fixed top-4 left-4 z-50 p-2 text-white rounded-lg bg-blue-500 " 
         onClick={() => setIsOpen(true)}
         aria-expanded={isOpen}
         aria-controls="mobile-sidebar"
