@@ -9,7 +9,7 @@ if (!dadosDbGlobal.users) {
 
 export const userRepo = {
     //Traz tudo
-    getAll: () => globalForDb.users,
+    getAll: () => dadosDbGlobal.users,
 
     // Adiciona novo usuário
     create: (user) => {
