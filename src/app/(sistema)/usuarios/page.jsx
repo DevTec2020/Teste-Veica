@@ -13,17 +13,23 @@ export default function UsuariosPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null); 
 
-  // Buscando usuários na API
+  // Carregar Usuários da API
   async function fetchUsers() {
     try {
       setLoading(true);
       const response = await axios.get("/api/users");
+
       // Eu preciso de um array no retorno para da certo mesmo se der erro na busca 
-      setUsers(Array.isArray(response.data) ? response.data : []);
+      if (Array.isArray(response.data)){
+        setUsers(response.data);
+      } else {
+        setUsers([]);
+      }
 
     } catch (error) {
       console.error("Erro ao buscar usuários", error);
       setUsers([]);
+      
     } finally {
       setLoading(false);
     }
