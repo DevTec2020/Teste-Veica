@@ -74,8 +74,8 @@ export default function UsuariosPage() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <header className="w-full py-6 flex flex-col items-center justify-center gap-2 bg-white border-b border-gray-200">
+    <div className="flex flex-col min-h-screen bg-white">
+      <header className="w-full  py-4 flex flex-col items-center justify-center gap-2">
         <div className="bg-blue-100 p-3 rounded-full text-blue-600">
           <FaUsers size={24} />
         </div>
@@ -85,7 +85,7 @@ export default function UsuariosPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-4 max-w-6xl mx-auto mt-8 w-full pb-8">
+      <main className="flex-1 px-4 max-w-7xl mx-auto mt-8 w-full pb-8">
         <div className="bg-white p-4 rounded-t-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
           <div className="relative w-full md:w-1/3">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
