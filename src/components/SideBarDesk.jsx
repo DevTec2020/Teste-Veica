@@ -12,7 +12,6 @@ export default function SideBarDesk() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
     { label: "Usuários", href: "/usuarios", icon: FaUsers },
     { label: "Permutações", href: "/desafios/permutacao", icon: FaLayerGroup },
     { label: "Decifra", href: "/desafios/decifra", icon: FaKey },

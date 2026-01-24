@@ -5,9 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaUserPlus, FaUser, FaLock, FaArrowLeft } from "react-icons/fa";
+import { FaUserPlus, FaUser, FaLock, FaTimes } from "react-icons/fa";
 
 const cadastroSchema = z.object({
   login: z.string().min(3, "O login deve ter pelo menos 3 caracteres"),
@@ -30,22 +29,34 @@ export default function CadastroPage() {
   const onSubmit = async (data) => {
     try {
       setServerError("");
+
+      //console.log(`recebi os dados ${data.login} e ${data.senha}`)
       
       await axios.post("/api/users", {
         login: data.login,
         senha: data.senha
       });
 
+      //console.log(`passei pela chamada  da api`)
+
       setSuccess(true);
 
+      setTimeout(() => {
+        router.push("/usuarios");
+      }, 5000);
+
+      
     } catch (err) {
       setServerError(`Erro ao cadastrar: ${err}`);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-200 relative">
+          <button  className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+            <FaTimes/>
+          </button>
         
         <div className="flex flex-col items-center mb-8">
           <div className="bg-blue-100 p-4 rounded-full text-blue-600 mb-4 shadow-sm">
@@ -107,7 +118,7 @@ export default function CadastroPage() {
           {success && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center mb-4">
               <strong className="font-bold">Sucesso!</strong>
-              <span className="block sm:inline"> Usuário criado. Redirecionando...</span>
+              <span className="block sm:inline"> Usuário criado</span>
             </div>
           )}
 

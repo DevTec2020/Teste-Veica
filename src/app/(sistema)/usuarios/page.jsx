@@ -5,6 +5,7 @@ import axios from "axios";
 import { FaUsers, FaPlus, FaEdit, FaTrash, FaSearch, FaTimes, FaSave } from "react-icons/fa";
 
 import { useUser} from "@/contexts/UserContext";
+import CadastroPage from "../cadastro/page";
 
 
 export default function UsuariosPage() {
@@ -134,9 +135,9 @@ export default function UsuariosPage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Login</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Cadastro</th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Login</th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Data Cadastro</th>
+                  <th className="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Ações</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -156,7 +157,7 @@ export default function UsuariosPage() {
                           <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold mr-3">
                             {user.login.charAt(0).toUpperCase()}
                           </div>
-                          <div className="text-sm font-medium text-gray-900">{user.login}</div>
+                          <div className="text-md font-medium text-gray-900">{user.login}</div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -165,12 +166,12 @@ export default function UsuariosPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                         <button 
                           onClick={() => openModal(user)}
-                          className="text-indigo-600 hover:text-indigo-900 mx-2 p-2 hover:bg-indigo-50 rounded transition" title="Editar">
+                          className="text-gray-400 hover:text-indigo-900 mx-2 p-2 transition cursor-pointer" title="Editar">
                           <FaEdit size={18} />
                         </button>
                         <button 
                           onClick={() => handleDelete(user.id)}
-                          className="text-red-600 hover:text-red-900 mx-2 p-2 hover:bg-red-50 rounded transition" title="Excluir">
+                          className="text-gray-400 hover:text-red-900 mx-2 p-2 transition cursor-pointer" title="Excluir">
                           <FaTrash size={18} />
                         </button>
                       </td>
@@ -185,59 +186,7 @@ export default function UsuariosPage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all scale-100">
-            <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-              <h3 className="text-lg font-bold text-gray-800">
-                {editingUser ? "Editar Usuário" : "Novo Usuário"}
-              </h3>
-              <button onClick={closeModal} className="text-gray-400 hover:text-gray-600 transition">
-                <FaTimes />
-              </button>
-            </div>
-
-            <form onSubmit={handleSave} className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Login</label>
-                <input 
-                  type="text" 
-                  required
-                  value={formData.login}
-                  onChange={(e) => setFormData({...formData, login: e.target.value})}
-                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  {editingUser ? "Nova Senha (opcional)" : "Senha"}
-                </label>
-                <input 
-                  type="password" 
-                  required={!editingUser} 
-                  placeholder={editingUser ? "Deixe em branco para manter" : ""}
-                  value={formData.senha}
-                  onChange={(e) => setFormData({...formData, senha: e.target.value})}
-                  className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none text-gray-900"
-                />
-              </div>
-
-              <div className="pt-2 flex gap-3">
-                <button 
-                  type="button" 
-                  onClick={closeModal}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50 transition"
-                >
-                  Cancelar
-                </button>
-                <button 
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-bold transition flex justify-center items-center gap-2"
-                >
-                  <FaSave /> Salvar
-                </button>
-              </div>
-            </form>
-          </div>
+          <CadastroPage/>
         </div>
       )}
     </div>

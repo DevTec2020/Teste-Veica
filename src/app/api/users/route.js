@@ -11,6 +11,9 @@ export async function GET (){
             return NextResponse.json([])
         }
 
+        // Estou só validando via console a quantidade de usuários que estão em memoria.
+        console.log("API GET /users - Total na memória:", users.length);
+
         return NextResponse.json(users);
 
     } catch(error){
@@ -24,6 +27,10 @@ export async function POST(request) {
   try {
     const body = await request.json();
     
+    // Aqui eu queria apenas ver o que eu recebia do form para me ajudar e resolver um erro.
+    console.log("API POST /users - Recebido:", body);
+
+
     if (!body.login || !body.senha) {
         return NextResponse.json(
             { message: "Dados inválidos" },

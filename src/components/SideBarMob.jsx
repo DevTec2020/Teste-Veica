@@ -7,7 +7,6 @@ export default function SideBarMob({ isOpen, onClose }) {
   const pathname = usePathname();
 
   const menuItems = [
-    { label: "Cadastrar", href: "/cadastro", icon: FaUsers },
     { label: "Usuários", href: "/usuarios", icon: FaUsers },
     { label: "Permutações", href: "/desafios/permutacao", icon: FaLayerGroup },
     { label: "Decifra", href: "/desafios/decifra", icon: FaKey },
