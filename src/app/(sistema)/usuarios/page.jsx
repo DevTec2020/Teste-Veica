@@ -2,57 +2,42 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FaUsers, FaPlus, FaEdit, FaTrash, FaSearch, FaTimes, FaSave } from "react-icons/fa";
-
-import { useUser} from "@/contexts/UserContext";
-import CadastroPage from "../cadastro/page";
-
+import { FaUsers, FaPlus, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
+import ModalEditUser from "@/components/ModalEditUser";
 
 export default function UsuariosPage() {
-  const { saveSession } = useUser();
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null); 
-  const [formData, setFormData] = useState({ login: "", senha: "" });
 
-  // Carregar Usuários
-  async function fetchUsers(params) {
+  // Buscando usuários na API
+  async function fetchUsers() {
     try {
       setLoading(true);
       const response = await axios.get("/api/users");
-      
-      //Verificadno se response é um Array
-      if (Array.isArray(response.data)){
-        setUsers(response.data);
-      } else {
-        setUsers([]);
-      }
-      
+      // Eu preciso de um array no retorno para da certo mesmo se der erro na busca 
+      setUsers(Array.isArray(response.data) ? response.data : []);
+
     } catch (error) {
       console.error("Erro ao buscar usuários", error);
+      setUsers([]);
     } finally {
       setLoading(false);
     }
   }
 
-
+  // chamando a função de busca ao carregar a tela
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  //Manipulação do Modal
+
+  // Trabalhando com o modal e enviando os dados 
   const openModal = (user = null) => {
-    if (user) {
-      setEditingUser(user);
-      setFormData({ login: user.login, senha: user.senha || "" }); 
-    } else {
-      setEditingUser(null);
-      setFormData({ login: "", senha: "" });
-    }
+    setEditingUser(user);
     setIsModalOpen(true);
   };
 
@@ -61,44 +46,30 @@ export default function UsuariosPage() {
     setEditingUser(null);
   };
 
-  // Salvar (Criar ou Editar)
-  const handleSave = async (e) => {
-    e.preventDefault();
-    try {
-      if (editingUser) {
-        // Editar (PUT)
-        await axios.put(`/api/users/${editingUser.id}`, formData);
-      } else {
-        // Criar (POST)
-        await axios.post("/api/users", formData);
-      }
-      fetchUsers(); 
-      closeModal();
-    } catch (error) {
-      alert("Erro ao salvar usuário.");
-    }
+  const handleSuccessFromModal = () => {
+    fetchUsers(); 
   };
 
-  //Excluir
-  const handleDelete = async (id) => {
+  async function handleDelete(id){
     if (confirm("Tem certeza que deseja excluir este usuário?")) {
       try {
         await axios.delete(`/api/users/${id}`);
-        fetchUsers();
+        setUsers((prev) => prev.filter((u) => u.id !== id));
+        alert("Usuário excluído.");
       } catch (error) {
-        alert("Erro ao excluir.");
+        console.error(error);
+        alert("Erro ao excluir usuário.");
       }
     }
   };
 
-  // Filtro de busca local
-  const filteredUsers = users.filter(u => 
+  const filteredUsers = users.filter((u) => 
     u.login.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <header className="w-full  py-4 flex flex-col items-center justify-center gap-2">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <header className="w-full py-6 flex flex-col items-center justify-center gap-2 bg-white border-b border-gray-200">
         <div className="bg-blue-100 p-3 rounded-full text-blue-600">
           <FaUsers size={24} />
         </div>
@@ -108,8 +79,8 @@ export default function UsuariosPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-4 max-w-6xl mx-auto mt-10 w-full pb-8">
-        <div className="bg-white p-4 rounded-t-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+      <main className="flex-1 px-4 max-w-6xl mx-auto mt-8 w-full pb-8">
+        <div className="bg-white p-4 rounded-t-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
           <div className="relative w-full md:w-1/3">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input 
@@ -122,15 +93,14 @@ export default function UsuariosPage() {
           </div>
           
           <button 
-            onClick={() => openModal()}
-            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow"
+            onClick={() => openModal(null)}
+            className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition shadow cursor-pointer"
           >
             <FaPlus /> Novo Usuário
           </button>
         </div>
 
-        {/* Tabela de usuários */}
-        <div className="bg-white shadow-lg rounded-b-xl overflow-hidden border border-gray-200">
+        <div className="bg-white shadow-lg rounded-b-xl overflow-hidden border-x border-b border-gray-200">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -152,26 +122,34 @@ export default function UsuariosPage() {
                 ) : (
                   filteredUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 transition">
+                      
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
+                          {/* Login do usuário na tabela */}
                           <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold mr-3">
-                            {user.login.charAt(0).toUpperCase()}
+                            {user.login?.charAt(0).toUpperCase()}
                           </div>
                           <div className="text-md font-medium text-gray-900">{user.login}</div>
                         </div>
                       </td>
+
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(user.dataCadastro).toLocaleDateString('pt-BR')} <span className="text-xs ml-1">{new Date(user.dataCadastro).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</span>
+                        {user.dataCadastro ? new Date(user.dataCadastro).toLocaleDateString('pt-BR') : '-'}
                       </td>
+
                       <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                         <button 
                           onClick={() => openModal(user)}
-                          className="text-gray-400 hover:text-indigo-900 mx-2 p-2 transition cursor-pointer" title="Editar">
+                          className="text-gray-500 hover:text-gray-700 mx-2 p-2 cursor-pointer" 
+                          title="Editar"
+                        >
                           <FaEdit size={18} />
                         </button>
                         <button 
                           onClick={() => handleDelete(user.id)}
-                          className="text-gray-400 hover:text-red-900 mx-2 p-2 transition cursor-pointer" title="Excluir">
+                          className="text-gray-500 hover:text-gray-700 mx-2 p-2 cursor-pointer" 
+                          title="Excluir"
+                        >
                           <FaTrash size={18} />
                         </button>
                       </td>
@@ -185,8 +163,20 @@ export default function UsuariosPage() {
       </main>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-fade-in">
-          <CadastroPage/>
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div 
+             className="w-full max-w-md"
+             onClick={(e) => e.stopPropagation()}
+          >
+            <ModalEditUser 
+                userToEdit={editingUser} 
+                onClose={closeModal} 
+                onSuccess={handleSuccessFromModal}
+            />
+          </div>
         </div>
       )}
     </div>
