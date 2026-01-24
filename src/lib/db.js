@@ -18,7 +18,15 @@ export const userRepo = {
             id: crypto.randomUUID(),
             dataCadastro: new Date().toISOString()
         };
+
+        const findUser = dadosDbGlobal.users.find(u => u.login === user.login);
+
+        // Verificação se o usuário já existe no banco 
+        if (findUser){
+            throw new Error("DUPLICATE_USER");
+        }
         
+        // Criando usuário
         dadosDbGlobal.users.push(newUser);
         
         return newUser;
@@ -46,8 +54,6 @@ export const userRepo = {
             return {
                 id: 'sos',
                 login: SOS_LOGN,
-                nome: 'Veica',
-                role: 'admin'
             };
         }
 

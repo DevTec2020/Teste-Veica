@@ -30,6 +30,8 @@ export default function CadastroPage() {
     try {
       setServerError("");
 
+      setSuccess(false);
+
       //console.log(`recebi os dados ${data.login} e ${data.senha}`)
       
       await axios.post("/api/users", {
@@ -43,11 +45,15 @@ export default function CadastroPage() {
 
       setTimeout(() => {
         router.push("/usuarios");
-      }, 5000);
+      }, 3000);
 
       
-    } catch (err) {
-      setServerError(`Erro ao cadastrar: ${err}`);
+    } catch (erro) {
+      if (erro.response && erro.response.data && erro.response.data.message){
+        setServerError(erro.response.data.message);
+      } else {
+        setServerError(`Ocorreu um erro desconhecido. ${erro}`);
+      }
     }
   };
 

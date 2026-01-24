@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Scroll Area */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 bg-gray-100 overflow-y-auto">
           {children}
         </main>
       </div>

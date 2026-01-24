@@ -28,7 +28,7 @@ export async function POST(request) {
     const body = await request.json();
     
     // Aqui eu queria apenas ver o que eu recebia do form para me ajudar e resolver um erro.
-    console.log("API POST /users - Recebido:", body);
+    //console.log("API POST /users - Recebido:", body);
 
 
     if (!body.login || !body.senha) {
@@ -42,6 +42,15 @@ export async function POST(request) {
     return NextResponse.json(newUser, { status: 201 });
 
   } catch (error) {
+
+    // Erro de controle para se caso o usuário já exista
+    if (error.message === "DUPLICATE_USER") {
+        return NextResponse.json(
+            { message: "Este usuário já existe." },
+            { status: 409 }
+        );
+    }
+
     return NextResponse.json(
       { message: "Erro ao criar usuário" },
       { status: 500 }
