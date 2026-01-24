@@ -4,7 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaUsers, FaPlus, FaEdit, FaTrash, FaSearch, FaTimes, FaSave } from "react-icons/fa";
 
+import { useUser} from "@/contexts/UserContext";
+
+
 export default function UsuariosPage() {
+  const { saveSession } = useUser();
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,17 +19,25 @@ export default function UsuariosPage() {
   const [formData, setFormData] = useState({ login: "", senha: "" });
 
   // Carregar Usuários
-  const fetchUsers = async () => {
+  async function fetchUsers(params) {
     try {
       setLoading(true);
-      const res = await axios.get("/api/users");
-      setUsers(res.data);
+      const response = await axios.get("/api/users");
+      
+      //Verificadno se response é um Array
+      if (Array.isArray(response.data)){
+        setUsers(response.data);
+      } else {
+        setUsers([]);
+      }
+      
     } catch (error) {
       console.error("Erro ao buscar usuários", error);
     } finally {
       setLoading(false);
     }
-  };
+  }
+
 
   useEffect(() => {
     fetchUsers();

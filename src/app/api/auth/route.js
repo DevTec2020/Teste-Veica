@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { userRepo } from "@/lib/db";
-import { UserProvider} from "@/contexts/UserContext"
 
-
+// POST de valida usuário e libera o login
 export async function POST(request) {
   try {
     const body = await request.json();
