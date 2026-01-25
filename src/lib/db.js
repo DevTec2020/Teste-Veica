@@ -73,11 +73,12 @@ export const userRepo = {
         //Achou ? compara a senha hash
         if (user && bcrypt.compareSync(senha, user.senha)) {
 
-            
+
             // Retornando o usuário sem a senha
             // const { senha, ...userWithoutPass } = user;
             // return userWithoutPass;
 
+            //Aqui eu retorno o dataCadastro, id, login e senha propositalmente para ver que está criptografado, mas em cima tem o codigo que retorna sem a senha.
             return user;
         }
 

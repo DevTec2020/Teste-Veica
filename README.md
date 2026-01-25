@@ -5,7 +5,6 @@ Este é um sistema web desenvolvido como parte de um teste técnico. O objetivo 
 O sistema conta com um **CRUD de usuários** e uma seção dedicada à **resolução de desafios lógicos** (Permutações, Decifra e Cálculo de Imposto).
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ---
@@ -51,10 +50,52 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias e bibliotecas:
 - **[React Hook Form](https://react-hook-form.com/)** - Gerenciamento de formulários.
 - **[Zod](https://zod.dev/)** - Validação de valores e preenchimento de formularios.
 - **[Axios](https://axios-http.com/)** - Cliente HTTP para requisições.
+- **[JSON Web Token (JWT)](https://jwt.io/)** - Padrão para autenticação e segurança via tokens.
+- **[Bcryptjs](https://www.npmjs.com/package/bcryptjs)** - Biblioteca para criptografia (hash) de senhas.
 - **[React Icons](https://react-icons.github.io/react-icons/)** - Pacote de ícones.
 - **Context API** - Gerenciamento de estado global para autenticação.
 
 ---
+
+## Estrutura do Projeto
+
+```bash
+TESTECARGAS/
+├── prints/                       # Imagens utilizadas na documentação
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── (login)/              # Rota pública (Tela de Login)
+│   │   ├── (sistema)/            # Rotas protegidas (Acesso após Login)
+│   │   │   ├── desafios/         # Páginas dos desafios (Decifra, Imposto, Permutação)
+│   │   │   ├── usuarios/         # Página de CRUD de Usuários
+│   │   │   └── layout.tsx        # Layout de pós logado (Chama o Menu Side e Verifica se está logado)
+│   │   ├── api/                  # Backend Serverless
+│   │   │   ├── auth/             # Rota de autenticação (Aqui eu gero o JWT)
+│   │   │   └── users/            # Rotas de CRUD de usuários
+│   │   │       ├── [id]
+│   │   │       │   └── route.js  # Edita e Exclui usuários especificos
+│   │   │       └── route.js      # Lista e Adiciona usuários 
+│   │   └── layout.tsx            # Layout raiz da aplicação (Sem o Menu Side)
+│   │
+│   ├── assets/                   # Imagens, Ícones
+│   ├── components/               
+│   │   ├── ModalEditUser.jsx # Modal para edição/criação de usuários
+│   │   └── Sidebar.jsx       # Menu de navegação
+│   │
+│   ├── contexts/           # Gerenciamento de estado global
+│   │   └── UserContext.js  # Contexto de Autenticação e Sessão
+│   │
+│   ├── lib/                # Configurações de salvar dados em variavel
+│   │   └── db.js           # Mock de Banco de Dados em memória
+│   │
+│   └── utils/              # Lógica dos desafios
+│       ├── calcularImposto.js
+│       ├── decifraLetras.js
+│       └── permutacoesOrdenadas.js
+│
+├── .env                    # Variáveis de ambiente (Sei que não deve ser enviado em projeto real)
+└── README.md               # Documentação do projeto
+
 
 ## Como rodar o projeto
 
