@@ -111,6 +111,7 @@ export default function UsuariosPage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider w-1 whitespace-nowrap">Id</th>
                   <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Login</th>
                   <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Data Cadastro</th>
                   <th className="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Ações</th>
@@ -128,6 +129,11 @@ export default function UsuariosPage() {
                 ) : (
                   filteredUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50 transition">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="text-md font-medium text-gray-500">{user.id}</div>
+                        </div>
+                      </td>
                       
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -135,7 +141,7 @@ export default function UsuariosPage() {
                           <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold mr-3">
                             {user.login?.charAt(0).toUpperCase()}
                           </div>
-                          <div className="text-md font-medium text-gray-900">{user.login}</div>
+                          <div className="text-md font-medium text-gray-500">{user.login}</div>
                         </div>
                       </td>
 
