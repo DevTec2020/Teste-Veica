@@ -1,6 +1,6 @@
 # SysUser - Sistema Desafio Veica
 
-Este é um sistema web desenvolvido como parte de um teste técnico. O objetivo é demonstrar competências em desenvolvimento web, gerenciamento de estado, validação de formulários e resolução de algoritmos lógicos.
+Este é um sistema web desenvolvido como parte de um teste técnico. O objetivo é demonstrar competências em desenvolvimento web, gerenciamento de estado, validação de formulários e resolução de problemas propostos.
 
 O sistema conta com um **CRUD de usuários** e uma seção dedicada à **resolução de desafios lógicos** (Permutações, Decifra e Cálculo de Imposto).
 
@@ -68,7 +68,7 @@ Siga os passos abaixo para executar o projeto em sua máquina local:
 
 1. **Clone o repositório**
    ```bash
-   git clone [https://github.com/SEU-USUARIO/NOME-DO-REPO.git](https://github.com/SEU-USUARIO/NOME-DO-REPO.git)
+   git clone https://github.com/DevTec2020/Teste-Veica.git
 
 2. **Instale as dependencias**
    ```bash
