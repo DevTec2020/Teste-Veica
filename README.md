@@ -79,22 +79,22 @@ TESTECARGAS/
 │   │
 │   ├── assets/                   # Imagens, Ícones
 │   ├── components/               
-│   │   ├── ModalEditUser.jsx # Modal para edição/criação de usuários
-│   │   └── Sidebar.jsx       # Menu de navegação
+│   │   ├── ModalEditUser.jsx     # Modal para edição/criação de usuários
+│   │   └── Sidebar.jsx           # Menu de navegação
 │   │
-│   ├── contexts/           # Gerenciamento de estado global
-│   │   └── UserContext.js  # Contexto de Autenticação e Sessão
+│   ├── contexts/                 # Gerenciamento de estado global
+│   │   └── UserContext.js        # Contexto de Autenticação e Sessão
 │   │
-│   ├── lib/                # Configurações de salvar dados em variavel
-│   │   └── db.js           # Mock de Banco de Dados em memória
+│   ├── lib/                      # Configurações de salvar dados em variavel
+│   │   └── db.js                 # Mock de Banco de Dados em memória
 │   │
-│   └── utils/              # Lógica dos desafios
+│   └── utils/                    # Lógica dos desafios
 │       ├── calcularImposto.js
 │       ├── decifraLetras.js
 │       └── permutacoesOrdenadas.js
 │
-├── .env                    # Variáveis de ambiente (Sei que não deve ser enviado em projeto real)
-└── README.md               # Documentação do projeto
+├── .env                          # Variáveis de ambiente (Sei que não deve ser enviado em projeto real)
+└── README.md                     # Documentação do projeto
 
 ```
 
