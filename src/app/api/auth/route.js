@@ -1,18 +1,24 @@
 import { NextResponse } from "next/server";
 import { userRepo } from "@/lib/db";
+import jwt from "jsonwebtoken";
 
 // POST de valida usuário e libera o login
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const { login, senha } = body;
+    const { login, senha } = await request.json();
 
     // Pergunta ao banco se o usuário existe
     const user = userRepo.authenticate(login, senha);
 
     // OK Liberado
     if (user) {
-      return NextResponse.json({ user }); 
+      const token = jwt.sign(
+        { id: user.id, username:user.login },
+        process.env.JWT_SECRET,
+        { expiresIn: '1d'}
+      );
+
+      return NextResponse.json({ user, token }); 
     }
 
     // Login Não Autorizado

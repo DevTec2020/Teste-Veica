@@ -16,6 +16,8 @@ export function UserProvider({ children }) {
     // Função de Login e salva a sessão no localStorage
     function saveSession(data){
         localStorage.setItem(`${LOCAL_STORAGE_KEY}:user`, JSON.stringify(data.user))
+        localStorage.setItem(`${LOCAL_STORAGE_KEY}:token`, data.token)
+
         setUser(data)
         router.push('/usuarios');
 
@@ -38,6 +40,8 @@ export function UserProvider({ children }) {
         setUser(null)
 
         localStorage.removeItem(`${LOCAL_STORAGE_KEY}:user`)
+        localStorage.removeItem(`${LOCAL_STORAGE_KEY}:token`)
+
 
         router.push("/")
     }

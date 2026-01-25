@@ -2,6 +2,8 @@ const dadosDbGlobal = global;
 const SOS_LOGN = process.env.LOGIN
 const SOS_PASS = process.env.PASS
 
+import bcrypt from "bcryptjs";
+
 if (!dadosDbGlobal.users) {
   dadosDbGlobal.users = [];
 }
@@ -13,8 +15,11 @@ export const userRepo = {
 
     // Adiciona novo usuário
     create: (user) => {
+        const senhaComHash = bcrypt.hashSync(user.senha, 5)
+
         const newUser = {
             ...user,
+            senha:senhaComHash,
             id: crypto.randomUUID(),
             dataCadastro: new Date().toISOString()
         };
@@ -37,8 +42,13 @@ export const userRepo = {
     update: (id, params) => {
         const user = dadosDbGlobal.users.find(u => u.id === id);
         
-        if (user) Object.assign(user, params);
+        // Criptografando senha depois de atualizar
+        if (user && params.senha){
+            params.senha = bcrypt.hashSync(params.senha, 5);
+        }
         
+        if (user) Object.assign(user, params);
+
         return user;
     },
 
@@ -57,12 +67,18 @@ export const userRepo = {
             };
         }
 
-        // busca usuários cadastrados na memória
-        const user = dadosDbGlobal.users.find(u => u.login === login && u.senha === senha);
-        if (user) {
+        // busca nos usuários cadastrados
+        const user = dadosDbGlobal.users.find(u => u.login === login);
+
+        //Achou ? compara a senha hash
+        if (user && bcrypt.compareSync(senha, user.senha)) {
+
+            
             // Retornando o usuário sem a senha
-            const { senha, ...userWithoutPass } = user;
-            return userWithoutPass;
+            // const { senha, ...userWithoutPass } = user;
+            // return userWithoutPass;
+
+            return user;
         }
 
         return null;
