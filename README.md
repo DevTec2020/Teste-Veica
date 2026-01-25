@@ -14,7 +14,7 @@ O sistema conta com um **CRUD de usuários** e uma seção dedicada à **resolu�
 
 | Login | Gestão de Usuários |
 |:---:|:---:|
-| <img src="./prints/login.png" width="400" alt="Tela de Login"> | <img src="./prints/Usuarios.png" width="400" alt="Gestão de Usuários"> |
+| <img src="./prints/Login.png" width="400" alt="Tela de Login"> | <img src="./prints/Usuarios.png" width="400" alt="Gestão de Usuários"> |
 
 | Permutações | Decifra | Imposto |
 |:---:|:---:|:---:|
