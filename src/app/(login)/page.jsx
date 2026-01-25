@@ -50,7 +50,7 @@ export default function LoginPage() {
     <div className="relative min-h-screen flex items-center justify-center p-4">
       <Image
         src={Wallpaper} 
-        alt="Background Office"
+        alt="Background sistema"
         fill
         className="object-cover -z-20" 
         quality={100}
