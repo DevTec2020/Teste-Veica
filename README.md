@@ -96,6 +96,7 @@ TESTECARGAS/
 ├── .env                    # Variáveis de ambiente (Sei que não deve ser enviado em projeto real)
 └── README.md               # Documentação do projeto
 
+```
 
 ## Como rodar o projeto
 
