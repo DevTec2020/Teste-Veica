@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { UserProvider} from "@/contexts/UserContext"
+import Icone from "@/assets/ico.png"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SysUser",
   description: "Sistema feito para o desafio tecnico Veica",
+  icons: {
+    icon: Icone.src
+  }
 };
 
 export default function RootLayout({

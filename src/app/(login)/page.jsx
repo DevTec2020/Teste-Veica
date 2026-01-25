@@ -6,8 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
 import { FaLock, FaUser, FaSignInAlt } from "react-icons/fa";
+import Image from "next/image";
 
 import { useUser} from "@/contexts/UserContext";
+import Wallpaper from "@/assets/Wallpaper.png"
 
 // Schema de validação zod
 const loginSchema = z.object({
@@ -45,15 +47,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      
+    <div className="relative min-h-screen flex items-center justify-center p-4">
+      <Image
+        src={Wallpaper} 
+        alt="Background Office"
+        fill
+        className="object-cover -z-20" 
+        quality={100}
+        priority
+      />
+
+      <div className="absolute inset-0 bg-black/40 -z-10 backdrop-blur-sm" />
+
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-200">
         <div className="flex flex-col items-center mb-8">
-          <div className="bg-blue-600 p-4 rounded-full text-white mb-4 shadow-lg shadow-blue-600/30">
-            <FaSignInAlt size={32} />
+          <div className="text-center mb-4">
+              <h1 className="text-6xl text-gray-400 font-bold">
+                  <span className="text-blue-500">Sys</span>User
+              </h1>
+              <p className="text-gray-400 text-lg">Sistema Desafio Veica</p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800">Bem-vindo</h1>
-          <p className="text-gray-500 text-sm mt-1">Faça login para acessar o sistema</p>
+
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
